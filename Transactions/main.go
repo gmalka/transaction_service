@@ -99,7 +99,7 @@ func createTransaction(writer http.ResponseWriter, request *http.Request, params
 	var tr Transaction
 
 	writer.WriteHeader(204)
-	log.Println("Get request")
+	log.Println("Get request from", params.ByName("id"))
 	if request.Body != nil {
 		defer request.Body.Close()
 		result, _ := io.ReadAll(request.Body)

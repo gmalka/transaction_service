@@ -1,7 +1,7 @@
 {
   "name": "USERS",
   "subjects": [
-    "USERS.*"
+    "USERS.>"
   ],
   "retention": "workqueue",
   "max_consumers": -1,
