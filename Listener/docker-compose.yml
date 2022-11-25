@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  consumer:
+    build: ./
+    command: ./app
+    ports:
+      - "8081:8081"
+    depends_on:
+      - producer
+
+  producer:
+    build: ../Transactions
+    command: ./app
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - nats
+
+  nats:
+    image: nats
+    restart: always
+    expose:
+      - 8222
+    ports:
+      - "8222:8222"
+    command:
+      - "--port=8222"
+      - "--js"
+      - "--store_dir=./nats_folder"
+    volumes:
+      - ../nats_folder:/nats_folder
+
+  db:
+    restart: always
+    build: ../db
+    volumes:
+      - ../myDb:/myDb
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
