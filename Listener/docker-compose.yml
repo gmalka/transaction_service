@@ -38,7 +38,7 @@ services:
     restart: always
     build: ../db
     volumes:
-      - ../myDb:/myDb
+      - ../myDb:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
